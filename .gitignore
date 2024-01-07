@@ -1,0 +1,108 @@
+package main
+
+import (
+	"encoding/base64"
+	"encoding/json"
+	"fmt"
+	"html/template"
+	"log"
+	"net/http"
+	"time"
+
+	"github.com/gorilla/mux"
+)
+
+// Structure pour stocker les détails de l'album
+type Album struct {
+	Name           string `json:"name"`
+	Image          string `json:"image"`
+	ReleaseDate    string `json:"release_date"`
+	NumberOfTracks int    `json:"total_tracks"`
+
+
+	type TrackInfo struct {
+		Name           string `json:"name"`
+		AlbumImage     string `json:"album_image"`
+		AlbumName      string `json:"album_name"`
+		ArtistName     string `json:"artist_name"`
+		ReleaseDate    string `json:"release_date"`
+		SpotifyURL     string `json:"spotify_url"`
+	}
+}
+
+func main() {
+	r := Release_date_precision: "day"mux.NewRouter()
+
+	r.HandleFunc("/album/jul", albumsHandler)
+
+	http.Handle("/", r)
+
+	fmt.Println("Serveur démarré sur le port 8080")
+	log.Fatal(http.ListenAndServe(":8080", nil))
+}
+
+func https://api.spotify.com/v1/artists/3IW7ScrzXmPvZhB27hmfgy/albums (w http.ResponseWriter, r *http.Request)
+	albums := []Album{
+		{
+			Name:           "C'est quand qu'il s'éteint?",
+			Image:          "lien_image_1.jpg",
+			ReleaseDate:    "2023-6-16",
+			Release_date_precision: "day"
+			NumberOfTracks: 23,
+		},
+		{
+			Name:           "La route est longue",
+			Image:          "lien_image_2.jpg",
+			ReleaseDate:    "2023-12-08",
+			Release_date_precision: "day"
+			NumberOfTracks: 23,
+		},
+	}
+
+
+	tmpl, err := template.New("albums").Parse
+	
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	err = tmpl.Execute(w, albums)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+func main() {
+    http.HandleFunc("/track/sdm", trackHandler)
+
+    fmt.Println("Serveur démarré sur le port 8080")
+    log.Fatal(http.ListenAndServe(":8080", nil))
+}
+
+func trackHandler(w http.ResponseWriter, r *http.Request) {
+endpoint := fmt.Sprintf("https:api.spotify.com/v1/search?q=track:Bolide%20allemand%20artist:SDM&type=track", trackID)
+
+
+    trackData := TrackInfo{
+        Name:        "Bolide allemand",
+        AlbumImage:  "lien_image.jpg",
+        AlbumName:   "Various Artists",
+        ArtistName:  "SDM",
+        ReleaseDate: "2023-01-01",
+        SpotifyURL:  "spotify:track:6OVuddIHDiUbhO8JOsTvnQ",
+
+		      
+    }
+
+    // Convertir les données en JSON
+    data, err := json.Marshal(trackData)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+
+    // Écrire la réponse en tant que JSON
+    w.Header().Set("Content-Type", "application/json")
+    w.Write(data)
+}
